@@ -1,11 +1,19 @@
+import { LogWebApi } from './log-web-api';
+import { LogLocalStorage } from './log-local-storage';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { LogPublisherConfig } from './log-publisher-config';
 import { LogConsole } from './logConsole';
 import { Injectable } from '@angular/core';
 import { LogPublisher } from './logPublisher';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/internal/operators/catchError';
+
+const PUBLISHERS_FILE = '/src/app/assets/log-publishers.json';
 
 @Injectable()
 export class LogPublishersServiceService {
 
-  constructor() {
+  constructor(private http: HttpClient) {
     // Build publishers arrays
     this.buildPublishers();
   }
@@ -13,7 +21,56 @@ export class LogPublishersServiceService {
   publishers: LogPublisher[] = [];
   // Build publishers array
   buildPublishers(): void {
-    // Create instance of LogConsole Class
-    this.publishers.push(new LogConsole());
+    let logPub: LogPublisher;
+
+    this.getLoggers().subscribe(response => {
+      for (const pub of response.filter(p => p.isActive)) {
+        switch (pub.loggerName.toLowerCase()) {
+          case 'console':
+            logPub = new LogConsole();
+            break;
+          case 'localstorage':
+            logPub = new LogLocalStorage();
+            break;
+          case 'webapi':
+            logPub = new LogWebApi(this.http);
+            break;
+        }
+        // Set location of logging
+        logPub.location = pub.loggerLocation;
+        // Add publisher to array
+        this.publishers.push(logPub);
+      }
+    });
+  }
+
+  getLoggers(): Observable<LogPublisherConfig[]> {
+
+    const options = { params: {},
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json'
+    }) };
+    return this.http.get<any>(PUBLISHERS_FILE, options)
+      .pipe(
+        catchError(this.handleErrors)
+      );
+  }
+
+  private handleErrors(error: any):
+                 Observable<any> {
+    const errors: string[] = [];
+    let msg = '';
+
+    msg = 'Status: ' + error.status;
+    msg += ' - Status Text: ' + error.statusText;
+    if (error.json()) {
+      msg += ' - Exception Message: ' +
+             error.json().exceptionMessage;
+    }
+    errors.push(msg);
+
+    console.error('An error occurred', errors);
+
+    return Observable.throw(errors);
   }
 }

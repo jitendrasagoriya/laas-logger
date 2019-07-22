@@ -23,15 +23,15 @@ export class AuthenticationService {
   public application: Application;
 
   constructor(private http: HttpClient,
-    httpErrorHandler: HttpErrorHandler,
-    private configurationService: ConfigurationService,
-    private exceptionService: ExceptionService) {
+              httpErrorHandler: HttpErrorHandler,
+              private configurationService: ConfigurationService,
+              private exceptionService: ExceptionService) {
       this.handleError = httpErrorHandler.createHandleError('AuthenticationService');
     }
 
 
   /** POST: add a new application to the database */
-  addApplication (application: Application): Observable<Application> {
+  addApplication(application: Application): Observable<Application> {
     return this.http.post<Application>(this.configurationService.baseAuthenticationDevUrl, application, httpOptions)
       .pipe(
         catchError(this.handleError('addApplication', application))
@@ -39,7 +39,7 @@ export class AuthenticationService {
   }
 
   /** GET: get application to the database */
-  getApplication (email: string, password: string): Observable<Application> {
+  getApplication(email: string, password: string): Observable<Application> {
     // tslint:disable-next-line:prefer-const
     const options = { params: new HttpParams().set('email', email.trim()).set('password', password.trim()),
     headers: new HttpHeaders({

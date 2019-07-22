@@ -12,7 +12,7 @@ export enum LogLevel {
   Off = 6
 }
 export class LogEntry {
-  message: string;
+  message: string ;
   level: LogLevel;
   extraInfo: any[];
   logWithDate: boolean;
@@ -44,11 +44,6 @@ export class LogEntry {
   }
 
 }
-
-
-
-
-
 @Injectable({
   providedIn: 'root'
 })
