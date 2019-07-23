@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ConfigurationService {
 
-  public baseProdUrl = 'http://localhost:8084/api/db/ui/log/';
+  public baseProdUrl = 'http://log-as-service.herokuapp.com/api/db/ui/log/';
   public baseDevUrl = 'http://localhost:8084/api/db/ui/log/';
 
-  public baseAuthenticationProdUrl = 'http://localhost:8084/api/authentication/';
+  public baseAuthenticationProdUrl = 'http://log-as-service.herokuapp.com/api/authentication/';
   public baseAuthenticationDevUrl = 'http://localhost:8084/api/authentication/';
 
   public isProd = false;
