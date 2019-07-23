@@ -9,4 +9,5 @@ export class Application {
     email: string;
     password: string;
     exception: Exception;
+    token: string;
 }

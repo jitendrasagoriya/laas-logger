@@ -32,7 +32,7 @@ export class AuthenticationService {
 
   /** POST: add a new application to the database */
   addApplication(application: Application): Observable<Application> {
-    return this.http.post<Application>(this.configurationService.baseAuthenticationDevUrl, application, httpOptions)
+    return this.http.post<Application>(this.configurationService.getAuthenticateUrl(), application, httpOptions)
       .pipe(
         catchError(this.handleError('addApplication', application))
       );
@@ -45,7 +45,7 @@ export class AuthenticationService {
     headers: new HttpHeaders({
       'Content-Type':  'application/json'
     }) };
-    return this.http.get<Application>(this.configurationService.baseAuthenticationDevUrl, options)
+    return this.http.get<Application>(this.configurationService.getAuthenticateUrl(), options)
       .pipe(
         catchError(this.handleError('addApplication', this.application))
       );

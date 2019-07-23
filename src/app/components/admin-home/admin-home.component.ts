@@ -48,7 +48,7 @@ export class AdminHomeComponent implements OnInit, AfterViewInit ,  AfterContent
   public pieChartPlugins = [];
 
   constructor(private logService: LogService) {
-    alert('constructor');
+
   }
   ngOnInit() {
     this.getLogs();
@@ -72,7 +72,6 @@ export class AdminHomeComponent implements OnInit, AfterViewInit ,  AfterContent
   }
 
   ngAfterViewInit() {
-    alert('ngAfterViewInit');
   }
 
   getErrorCount(): number {
