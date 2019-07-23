@@ -9,7 +9,7 @@ export class ConfigurationService {
   public baseAuthenticationProdUrl = 'http://log-as-service.herokuapp.com/api/authentication/';
   public baseAuthenticationDevUrl = 'http://localhost:8084/api/authentication/';
 
-  public isProd = false;
+  public isProd = true;
   constructor() { }
 
   public getBaseUrl(): string {
