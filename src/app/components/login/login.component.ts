@@ -1,7 +1,10 @@
+import { NgjLoggerService } from './../../../../projects/ngj-logger/src/lib/ngj-logger.service';
+import { LogService } from './../../services/log.service';
 import { AuthenticationService } from './../../services/authentication.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-login',
@@ -15,7 +18,9 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router,
               private formBuilder: FormBuilder,
-              private authentication: AuthenticationService) {
+              private authentication: AuthenticationService,
+              private logger: NgjLoggerService) {
+      logger.info('my first log by NgjLoggerService');
       if (localStorage.getItem('currentUser')) {
           this.router.navigate(['admin/home']);
       }

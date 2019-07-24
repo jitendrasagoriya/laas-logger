@@ -1,3 +1,5 @@
+import { LogPublishersServiceService } from './../../projects/ngj-logger/src/lib/log-publishers-service.service';
+import { NgjLoggerService } from './../../projects/ngj-logger/src/lib/ngj-logger.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { AuthenticationService } from './services/authentication.service';
 import { MessageService } from './services/message.service';
@@ -84,6 +86,8 @@ const appRoutes: Routes = [
     MessageService,
     AuthenticationService,
     AuthGuardService,
+    NgjLoggerService,
+    LogPublishersServiceService
     ],
   bootstrap: [AppComponent]
 })

@@ -22,8 +22,9 @@ export class LogPublishersServiceService {
   // Build publishers array
   buildPublishers(): void {
     let logPub: LogPublisher;
-
-    this.getLoggers().subscribe(response => {
+    logPub = new LogConsole();
+    this.publishers.push(logPub);
+    /*this.getLoggers().subscribe(response => {
       for (const pub of response.filter(p => p.isActive)) {
         switch (pub.loggerName.toLowerCase()) {
           case 'console':
@@ -41,7 +42,7 @@ export class LogPublishersServiceService {
         // Add publisher to array
         this.publishers.push(logPub);
       }
-    });
+    });*/
   }
 
   getLoggers(): Observable<LogPublisherConfig[]> {

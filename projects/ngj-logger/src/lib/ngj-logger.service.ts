@@ -15,7 +15,7 @@ export class LogEntry {
   message: string ;
   level: LogLevel;
   extraInfo: any[];
-  logWithDate: boolean;
+  logWithDate = true;
 
   private formatParams(params: any[]): string {
     let ret: string = params.join(',');
@@ -32,13 +32,13 @@ export class LogEntry {
 
   public buildLogString(): string {
     let result = '';
-    if (this.logWithDate) {
-      const dateFormat = require('dateformat');
-      const now = new Date();
-      result += dateFormat(now, 'dddd, mmmm dS, yyyy, h:MM:ss TT');
-    }
-    result += this.level;
+    result += '[' + LogLevel[this.level].toUpperCase() + ']';
+    result += ' ';
+    const now = new Date();
+    result += now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
+    result += ' ';
     result += this.message;
+    result += ' ';
     result += this.formatParams(this.extraInfo);
     return result;
   }
