@@ -22,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ChartsModule } from 'ng2-charts';
+import { SearchComponent } from './components/search/search.component';
 
 
 const appRoutes: Routes = [
@@ -39,6 +40,11 @@ const appRoutes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent,
+        canActivate: [AuthGuardService]
+      },
+      {
+        path: 'search',
+        component: SearchComponent,
         canActivate: [AuthGuardService]
       },
         {
@@ -65,7 +71,8 @@ const appRoutes: Routes = [
     PageNotFoundComponent,
     LogsComponent,
     AdminHomeComponent,
-    ProfileComponent
+    ProfileComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

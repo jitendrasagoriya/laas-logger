@@ -89,5 +89,30 @@ export class LogService {
       );
   }
 
+  search(keyword: string, level: string, toDate: string, fromDate: string): Observable<Log[]> {
+    keyword = keyword.trim();
+    level = level.trim();
+    toDate = toDate.trim();
+    fromDate = fromDate.trim();
+
+    const apiUrl = this.configurationService.getBaseUrl() + 'search';
+
+    // Add safe, URL encoded search parameter if there is a search term
+    const options = { params: new HttpParams()
+    .set('level', level.trim())
+    .set('keyword', keyword.trim())
+    .set('toDate', toDate.trim())
+    .set('fromDate', fromDate.trim()),
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+      'X-AUTH-LOG-HEADER': this.token
+    }) };
+
+    return this.http.get<Log[]>(apiUrl, options)
+      .pipe(
+        catchError(this.handleError<Log[]>('search', []))
+      );
+  }
+
 
 }
