@@ -11,6 +11,13 @@ export enum LogLevel {
   Fatal = 5,
   Off = 6
 }
+
+export class WebLog {
+  logTime: string;
+  logDate: string;
+  log: string;
+  level: string;
+}
 export class LogEntry {
   message: string ;
   level: LogLevel;
@@ -30,6 +37,17 @@ export class LogEntry {
     return ret;
   }
 
+
+  private convertToLog(): WebLog {
+    const webLog = new WebLog();
+    const now = new Date();
+    webLog.level = this.level.toString();
+    webLog.logDate = now.toLocaleDateString();
+    webLog.logTime = now.toLocaleTimeString();
+    webLog.log = this.buildWebLogString();
+    return webLog;
+  }
+
   public buildLogString(): string {
     let result = '';
     result += '[' + LogLevel[this.level].toUpperCase() + ']';
@@ -37,6 +55,14 @@ export class LogEntry {
     const now = new Date();
     result += now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
     result += ' ';
+    result += this.message;
+    result += ' ';
+    result += this.formatParams(this.extraInfo);
+    return result;
+  }
+
+  public buildWebLogString(): string {
+    let result = '';
     result += this.message;
     result += ' ';
     result += this.formatParams(this.extraInfo);

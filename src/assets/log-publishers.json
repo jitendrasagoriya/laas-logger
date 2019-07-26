@@ -1,0 +1,14 @@
+[
+    {
+      "loggerName": "console",
+      "loggerLocation": "",
+      "token": "",
+      "isActive": true
+    },    
+    {
+      "loggerName": "webapi",
+      "loggerLocation": "http://localhost:8084/api/db/ui/log/",
+      "token": "UPQGPK5T2J7BM0UNEEA6HHNXILX34B331562438203721",
+      "isActive": true
+    }
+  ]

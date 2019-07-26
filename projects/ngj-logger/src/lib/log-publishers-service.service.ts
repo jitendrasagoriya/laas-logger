@@ -8,7 +8,7 @@ import { LogPublisher } from './logPublisher';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/internal/operators/catchError';
 
-const PUBLISHERS_FILE = '/src/app/assets/log-publishers.json';
+const PUBLISHERS_FILE = 'assets/log-publishers.json';
 
 @Injectable()
 export class LogPublishersServiceService {
@@ -22,9 +22,7 @@ export class LogPublishersServiceService {
   // Build publishers array
   buildPublishers(): void {
     let logPub: LogPublisher;
-    logPub = new LogConsole();
-    this.publishers.push(logPub);
-    /*this.getLoggers().subscribe(response => {
+    this.getLoggers().subscribe(response => {
       for (const pub of response.filter(p => p.isActive)) {
         switch (pub.loggerName.toLowerCase()) {
           case 'console':
@@ -34,7 +32,7 @@ export class LogPublishersServiceService {
             logPub = new LogLocalStorage();
             break;
           case 'webapi':
-            logPub = new LogWebApi(this.http);
+            logPub = new LogWebApi(this.http, pub.loggerLocation, pub.token);
             break;
         }
         // Set location of logging
@@ -42,7 +40,7 @@ export class LogPublishersServiceService {
         // Add publisher to array
         this.publishers.push(logPub);
       }
-    });*/
+    });
   }
 
   getLoggers(): Observable<LogPublisherConfig[]> {
