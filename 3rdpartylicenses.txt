@@ -154,6 +154,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 ng2-charts
 ISC
 
+ngj-logger
+
 rxjs
 Apache-2.0
                                Apache License
