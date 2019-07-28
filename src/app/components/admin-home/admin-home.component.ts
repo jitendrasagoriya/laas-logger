@@ -3,6 +3,7 @@ import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Log } from './../../models/log';
 import { LogService } from './../../services/log.service';
 import { Component, OnInit, Input, AfterViewInit, AfterContentInit } from '@angular/core';
+import {NgjLoggerService} from "../../../../projects/ngj-logger/src/lib/ngj-logger.service";
 
 
 @Component({
@@ -26,14 +27,15 @@ export class AdminHomeComponent implements OnInit, AfterViewInit ,  AfterContent
     responsive: true,
   };
 
-  public barChartLabels: Label[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  public barChartLabels: Label[] = ['2019-01-27', '2019-01-26', '2019-01-21'];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [];
 
   public barChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
+    { data: [11, 4, 1], label: 'INFO' },
+    { data: [0, 0, 0], label: 'DEBUG' },
+    { data: [8, 2, 1], label: 'ERROR' }
   ];
 
 
@@ -47,7 +49,7 @@ export class AdminHomeComponent implements OnInit, AfterViewInit ,  AfterContent
   public pieChartLegend = true;
   public pieChartPlugins = [];
 
-  constructor(private logService: LogService) {
+  constructor(private logService: LogService, private logger: NgjLoggerService) {
 
   }
   ngOnInit() {
@@ -105,8 +107,8 @@ export class AdminHomeComponent implements OnInit, AfterViewInit ,  AfterContent
   }
 
   getYesterdayTotalCount() {
-    this.logService.getYesterDayCount('14').subscribe(count => {
-      this.yesterDay = count;
+     this.logService.getYesterDayCount('1').subscribe(count => {
+         this.yesterDay = count;
     });
   }
 

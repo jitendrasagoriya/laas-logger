@@ -1,0 +1,9 @@
+import {Log} from "./log";
+export class SearchResult {
+  public totalCount: number;
+  public currentPageNumber: number;
+  public list: Log[];
+  public firstPage: number;
+  public lastPage: number;
+  public pageCount: number;
+}

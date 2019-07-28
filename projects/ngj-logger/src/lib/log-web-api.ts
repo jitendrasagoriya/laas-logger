@@ -27,12 +27,11 @@ export class LogWebApi extends LogPublisher {
     log(entry: LogEntry): Observable<boolean> {
         httpOptions.headers =
           httpOptions.headers.set('X-AUTH-LOG-HEADER', this.token);
-        console.log('token :' + this.token);
-        console.log('location :' + this.location);
-        this.http.post<any >(this.location, entry.buildWebLogString() , httpOptions)
-            .pipe(catchError(this.handleErrors)
-         );
 
+        this.http.post<any >(this.location, entry.convertToLog() , httpOptions)
+          .subscribe(( responce )=>{
+            console.log(JSON.stringify(responce))
+          });
         return of(true);
     }
 

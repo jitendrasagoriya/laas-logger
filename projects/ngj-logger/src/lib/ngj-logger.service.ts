@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { LogPublisher } from './logPublisher';
 
 export enum LogLevel {
-  All = 0,
-  Debug = 1,
-  Info = 2,
-  Warn = 3,
-  Error = 4,
-  Fatal = 5,
-  Off = 6
+
+    Info = 0,
+    Debug = 1,
+    Error = 2,
+    Warn = 3,
+    Fatal = 4,
+    Off = 5,
+    All = 6,
 }
 
 export class WebLog {
@@ -38,12 +39,12 @@ export class LogEntry {
   }
 
 
-  private convertToLog(): WebLog {
+  public convertToLog(): WebLog {
     const webLog = new WebLog();
     const now = new Date();
     webLog.level = this.level.toString();
-    webLog.logDate = now.toLocaleDateString();
-    webLog.logTime = now.toLocaleTimeString();
+    webLog.logDate = now.getTime().toString();
+    webLog.logTime = now.getTime().toString();
     webLog.log = this.buildWebLogString();
     return webLog;
   }

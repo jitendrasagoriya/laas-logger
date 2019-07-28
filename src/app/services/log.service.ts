@@ -89,12 +89,18 @@ export class LogService {
       );
   }
 
-  search(keyword: string, level: string, toDate: string, fromDate: string): Observable<Log[]> {
+  search(keyword: string, level: string, toDate: string, fromDate: string, pageNumber: number, pageSize: number): Observable<Log[]> {
     keyword = keyword.trim();
     level = level.trim();
     toDate = toDate.trim();
     fromDate = fromDate.trim();
+    if(pageNumber === 0) {
+      pageNumber = 1;
+    }
 
+    if(pageSize === 0) {
+      pageSize = 10;
+    }
     const apiUrl = this.configurationService.getBaseUrl() + 'search';
 
     // Add safe, URL encoded search parameter if there is a search term
@@ -102,7 +108,10 @@ export class LogService {
     .set('level', level.trim())
     .set('keyword', keyword.trim())
     .set('toDate', toDate.trim())
-    .set('fromDate', fromDate.trim()),
+    .set('fromDate', fromDate.trim())
+    .set('page', pageNumber.toString())
+    .set('size', pageSize.toString()),
+
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
       'X-AUTH-LOG-HEADER': this.token

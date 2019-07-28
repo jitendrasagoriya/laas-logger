@@ -43,7 +43,7 @@ export class HttpErrorHandler {
 
         exception.code = error.status;
         exception.message = error.error;
-        this.logger.error(error.error, error.status);
+        this.logger.error(serviceName +' '+operation,[`server returned code ${error.status} with body "${error.error}"`]);
         console.log('Inside error instance');
         console.log('Inside application instance');
         const responce = result as any;

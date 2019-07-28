@@ -23,6 +23,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ChartsModule } from 'ng2-charts';
 import { SearchComponent } from './components/search/search.component';
+import { ViewAllComponent } from './components/view-all/view-all.component';
 
 
 const appRoutes: Routes = [
@@ -49,7 +50,7 @@ const appRoutes: Routes = [
       },
         {
           path: 'viewlogs',
-          component: LogsComponent,
+          component: ViewAllComponent,
           canActivate: [AuthGuardService]
         }
     ]
@@ -72,7 +73,8 @@ const appRoutes: Routes = [
     LogsComponent,
     AdminHomeComponent,
     ProfileComponent,
-    SearchComponent
+    SearchComponent,
+    ViewAllComponent
   ],
   imports: [
     BrowserModule,
