@@ -92,7 +92,7 @@
 
 											<span>
 												<label class="grey" for="showcount">Show:</label>
-												<select class="form-control showcount" name="showcount" id="showcount">
+												<select #pageSize class="form-control showcount" name="showcount" id="showcount" (change)="changePageSize(pageSize.value)">
 													<option value="10" selected>10</option>
 													<option value="20">20</option>
 													<option value="30">30</option>

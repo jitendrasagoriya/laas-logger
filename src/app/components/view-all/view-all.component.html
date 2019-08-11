@@ -11,11 +11,11 @@
               <form action="./" class="form-inline filters-form">
 											<span>
 												<label class="grey" for="with-selected">With Selected:</label>
-												<select class="form-control with-selected" name="with-selected" id="with-selected">
+												<select #levelFilter class="form-control with-selected" name="with-selected" id="with-selected">
 													<option value="">-</option>
-													<option value="approve">Approve</option>
-													<option value="decline">Decline</option>
-													<option value="delete">Delete</option>
+													<option value="INFO">INFO</option>
+													<option value="DEBUG">DEBUG</option>
+													<option value="ERROR">ERROR</option>
 												</select>
 											</span>
                 <span>
@@ -30,7 +30,7 @@
 
                 <span>
 												<label class="grey" for="showcount">Show:</label>
-												<select class="form-control showcount" name="showcount" id="showcount">
+												<select #pageSize class="form-control showcount" name="showcount" id="showcount" (change)="changePageSize(pageSize.value)">
 													<option value="10" selected>10</option>
 													<option value="20">20</option>
 													<option value="30">30</option>
@@ -73,7 +73,7 @@
 
 
 
-              <tr class="item-editable" *ngFor="let log of logs">
+              <tr class="item-editable" *ngFor="let log of logs ">
 
                 <td class="media-middle"> #{{log.id}} </td>
                 <td>
@@ -107,21 +107,21 @@
       <div class="col-sm-12">
         <div class="row">
           <div class="col-md-6">
-            <ul class="pagination">
-              <li class="disabled">
-                <a href="#">
+            <ul class="pagination" *ngIf="result.list">
+              <li  [ngClass]="{'disabled':result.currentPageNumber==result.firstPage}">
+                <a href="javascript:void(0)" (click)="previous()">
                   <span class="sr-only">Prev</span>
-                  <i class="fa fa-angle-left" aria-hidden="true"></i>
+                  <i class="fa fa-angle-left"  ></i>
                 </a>
               </li>
-              <li class="active"><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li>
-                <a href="#">
+              <li *ngFor="let count of totalPage( result.pageCount)"
+                  [ngClass]="{'active': count==result.currentPageNumber}">
+                <a href="javascript:void(0)" (click)="getNext(count)">{{count}}</a>
+              </li>
+              <li [ngClass]="{'disabled':result.currentPageNumber==result.lastPage}">
+                <a href="javascript:void(0)" (click)="next()">
                   <span class="sr-only">Next</span>
-                  <i class="fa fa-angle-right" aria-hidden="true"></i>
+                  <i class="fa fa-angle-right"  ></i>
                 </a>
               </li>
             </ul>

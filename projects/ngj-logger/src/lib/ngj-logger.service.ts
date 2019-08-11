@@ -1,7 +1,16 @@
-import { LogPublishersServiceService } from './log-publishers-service.service';
+
 import { Injectable } from '@angular/core';
 import { LogPublisher } from './logPublisher';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {LogConsole} from "./logConsole";
+import {LogLocalStorage} from "./log-local-storage";
+import {LogWebApi} from "./log-web-api";
+import {Observable} from "rxjs";
+import {LogPublisherConfig} from "./log-publisher-config";
+import {catchError, retry} from "rxjs/operators";
+import {LogPublishersServiceService} from "./log-publishers-service.service";
 
+const PUBLISHERS_FILE = 'assets/log-publishers.json';
 export enum LogLevel {
 
     Info = 0,
@@ -79,12 +88,13 @@ export class NgjLoggerService {
   logWithDate: true;
   publishers: LogPublisher[];
 
-  constructor(private publishersService:
-    LogPublishersServiceService) {
+  constructor(private http: HttpClient) {
+    let publisherService = new LogPublishersServiceService(http);
       // Set publishers
-      this.publishers =
-        this.publishersService.publishers;
-    }
+    this.publishers = publisherService.publishers;
+  }
+
+
 
 
   private shouldLog(level: LogLevel): boolean {

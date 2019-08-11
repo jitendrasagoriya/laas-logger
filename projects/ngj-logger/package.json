@@ -1,6 +1,26 @@
 {
   "name": "ngj-logger",
-  "version": "1.0.0",
+  "version": "1.1.0",
+  "description":"This is a simple configurable lib used for logging for angular application.",
+  "author": "Jitendra Sagoriya (jitendrasagoriya@yahoo.co.in)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jitendrasagoriya/ngj-logger.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jitendrasagoriya/ngj-logger/issues"
+  },
+  "homepage": "https://github.com/jitendrasagoriya/ngj-logger",
+  "keywords": [
+    "angular",
+    "javascript",
+    "typescript",
+    "logger",
+    "logging",
+    "angular 8 logging",
+    "angular 8 logger"
+  ],
+  "license": "MIT",
   "peerDependencies": {
     "@angular/common": "^8.1.2",
     "@angular/core": "^8.1.2"

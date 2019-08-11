@@ -59,27 +59,30 @@ export class SearchComponent implements OnInit {
   public getNext(pageNumber: number) {
     this.logService.search(this.keyword, this.level, this.todate, this.fromDate,pageNumber,this.pageSize)
       .subscribe((result) => {
-        this.logger.info('Result',JSON.stringify(result))
         this.result = result;
         this.logs = this.result.list;
     });
   }
 
-  public previous() {
-    let pageNumber = 0;
-    pageNumber = this.result.currentPageNumber-1;
-    if(pageNumber < 1)
-      pageNumber = 1;
+  public changePageSize(size:string) {
+    this.pageSize = parseInt(size);
+    this.getNext(this.pageNumber);
+  }
 
-    this.getNext(pageNumber);
+  public previous() {
+    this.pageNumber = 0;
+    this.pageNumber = this.result.currentPageNumber-1;
+    if(this.pageNumber < 1)
+      this.pageNumber = 1;
+    this.getNext(this.pageNumber);
   }
 
   public next() {
-    let pageNumber = 0;
-    pageNumber = this.result.currentPageNumber + 1;
-    if(pageNumber > this.result.totalCount)
-      pageNumber = this.result.totalCount;
-    this.getNext(pageNumber);
+    this.pageNumber = 0;
+    this.pageNumber = this.result.currentPageNumber + 1;
+    if(this.pageNumber > this.result.totalCount)
+      this.pageNumber = this.result.totalCount;
+    this.getNext(this.pageNumber);
   }
 
   public totalPage(n: number): number[] {

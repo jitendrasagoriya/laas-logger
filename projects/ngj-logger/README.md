@@ -1,23 +1,63 @@
 # NgjLogger
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.2.
+* This is a simple configurable lib used for logging for angular application.
+* Simple to use.Simple to configure.
+* You can log in three different type.(console, local storage,Web api).
+* It is developed using Angular >=8.0.0 and its newly introduced ng g library schematics.
 
-## Code scaffolding
+## Installation
+npm i ngj-logger
 
-Run `ng generate component component-name --project ngj-logger` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngj-logger`.
-> Note: Don't forget to add `--project ngj-logger` or else it will be added to the default project in your `angular.json` file. 
+## How to use
+First you have to configure Log. For that you have to add `log-publishers.json' in your `assets` folder.
 
-## Build
+    [
+        {
+          "loggerName": "console",
+          "loggerLocation": "",
+          "token": "",
+          "isActive": true
+        },    
+        
+        Below is optional. If you want to write yor log in server you need to create 
+        account in logging DashBoard.
+        https://jitendrasagoriya.github.io/laas-logger/sign-up
+        {
+          "loggerName": "webapi",
+          "loggerLocation": "https://jitendrasagoriya.github.io/",
+          "token": "<Your Token>",
+          "isActive": true
+        }
+    ]
 
-Run `ng build ngj-logger` to build the project. The build artifacts will be stored in the `dist/` directory.
+Add  NgjLoggerService,LogPublishersServiceService in app.module.ts
 
-## Publishing
+            import { NgjLoggerService } from 'ngj-logger';
+            
+            .
+            .
+            .
+            
+            providers: [
+            ....,
+            NgjLoggerService
+            ]
 
-After building your library with `ng build ngj-logger`, go to the dist folder `cd dist/ngj-logger` and run `npm publish`.
+Add in constructor of component where you want to use.
 
-## Running unit tests
-
-Run `ng test ngj-logger` to execute the unit tests via [Karma](https://karma-runner.github.io).
+          constructor(....,
+              private logger: NgjLoggerService)
+              
+Use.
+    
+           this.logger.info('Your Message') / this.logger.info('Your Message', optional any[]) 
+           like : this.logger.info('Your Message',['India','UK','USA','France','etc']) 
+           Or 
+           this.logger.debug('Your Message') / this.logger.debug('Your Message', optional any[])
+           like : this.logger.debug('Your Message',['India','UK','USA','France','etc'])  
+           Or 
+           this.logger.error('Your Message') / this.logger.Error('Your Message', optional any[])
+           like : this.error.info('Your Message',['India','UK','USA','France','etc'])  
 
 ## Further help
 

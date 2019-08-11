@@ -6,15 +6,16 @@ import { LogConsole } from './logConsole';
 import { Injectable } from '@angular/core';
 import { LogPublisher } from './logPublisher';
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/internal/operators/catchError';
+import {catchError, retry} from "rxjs/operators";
 
 const PUBLISHERS_FILE = 'assets/log-publishers.json';
 
-@Injectable()
 export class LogPublishersServiceService {
 
-  constructor(private http: HttpClient) {
-    // Build publishers arrays
+  public http: HttpClient;
+
+  constructor(http: HttpClient) {
+    this.http = http;
     this.buildPublishers();
   }
   // Public properties
@@ -46,17 +47,17 @@ export class LogPublishersServiceService {
   getLoggers(): Observable<LogPublisherConfig[]> {
 
     const options = { params: {},
-    headers: new HttpHeaders({
-      'Content-Type':  'application/json'
-    }) };
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      }) };
     return this.http.get<any>(PUBLISHERS_FILE, options)
       .pipe(
-        catchError(this.handleErrors)
+        retry(1), catchError(this.handleErrors)
       );
   }
 
   private handleErrors(error: any):
-                 Observable<any> {
+    Observable<any> {
     const errors: string[] = [];
     let msg = '';
 
@@ -64,7 +65,7 @@ export class LogPublishersServiceService {
     msg += ' - Status Text: ' + error.statusText;
     if (error.json()) {
       msg += ' - Exception Message: ' +
-             error.json().exceptionMessage;
+        error.json().exceptionMessage;
     }
     errors.push(msg);
 

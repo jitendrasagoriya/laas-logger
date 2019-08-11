@@ -53,6 +53,8 @@ export class AdminHomeComponent implements OnInit, AfterViewInit ,  AfterContent
 
   }
   ngOnInit() {
+    this.logger.log('Test Successful......')
+
     this.getLogs();
     this.getYesterdayTotalCount();
     this.i = this.getInfoCount();

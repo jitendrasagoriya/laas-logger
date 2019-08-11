@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {environment} from "../../environments/environment.prod";
 
 @Injectable()
 export class ConfigurationService {
@@ -9,7 +10,7 @@ export class ConfigurationService {
   public baseAuthenticationProdUrl = 'https://log-as-service.herokuapp.com/api/authentication/';
   public baseAuthenticationDevUrl = 'http://localhost:8084/api/authentication/';
 
-  public isProd = false;
+  public isProd = environment.production;
   constructor() { }
 
   public getBaseUrl(): string {
