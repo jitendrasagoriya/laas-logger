@@ -6,6 +6,9 @@ import { NgjLoggerService } from './../../../../projects/ngj-logger/src/lib/ngj-
 import { Component, OnInit } from '@angular/core';
 // @ts-ignore
 import {SearchResult} from "../../models/searchresult";
+import {ActivatedRoute, NavigationStart, Router} from "@angular/router";
+import {filter, map} from "rxjs/operators";
+import {Observable} from "rxjs";
 
 
 @Component({
@@ -25,12 +28,24 @@ export class SearchComponent implements OnInit {
   searchForm: FormGroup;
   public logs: Log[];
   public result = {} as SearchResult;
+  private state: Observable<object>;
 
   constructor(private logger: NgjLoggerService,
               private formBuilder: FormBuilder,
-              private logService: LogService) { }
+              private logService: LogService,
+              private route: ActivatedRoute,
+              private router: Router) {
+
+
+
+  }
 
   ngOnInit() {
+
+    this.route.data.subscribe(data => {
+       this.logger.info("Search Data" ,[data]);
+    })
+
 
     this.searchForm = this.formBuilder.group({
       level: [''],

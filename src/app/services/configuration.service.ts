@@ -4,13 +4,19 @@ import {environment} from "../../environments/environment.prod";
 @Injectable()
 export class ConfigurationService {
 
-  public baseProdUrl = 'https://log-as-service.herokuapp.com/api/db/ui/log/';
-  public baseDevUrl = 'http://localhost:8084/api/db/ui/log/';
+  public readonly localBase = 'http://localhost:8084/api/';
+  public readonly serverBase = 'https://log-as-service.herokuapp.com/'
 
-  public baseAuthenticationProdUrl = 'https://log-as-service.herokuapp.com/api/authentication/';
-  public baseAuthenticationDevUrl = 'http://localhost:8084/api/authentication/';
+  public baseProdUrl = this.serverBase +'db/ui/log/';
+  public baseDevUrl = this.localBase +'db/ui/log/';
 
-  public isProd = environment.production;
+  public baseAuthenticationProdUrl = this.serverBase +'authentication/';
+  public baseAuthenticationDevUrl = this.localBase +'authentication/';
+
+  public adminLocalUrl = this.localBase + 'admin/'
+  public adminServerUrl = this.serverBase + 'admin/'
+
+  public isProd = true;
   constructor() { }
 
   public getBaseUrl(): string {
@@ -26,6 +32,14 @@ export class ConfigurationService {
       return this.baseAuthenticationProdUrl;
     } else {
       return this.baseAuthenticationDevUrl;
+    }
+  }
+
+  public getAdminUrl(): string {
+    if ( this.isProd ) {
+      return this.adminServerUrl;
+    } else {
+      return this.adminLocalUrl;
     }
   }
 

@@ -1,3 +1,5 @@
+import {Exception} from "./exception";
+
 export class Log {
     id: number;
     logTime: string;
@@ -5,4 +7,5 @@ export class Log {
     log: string;
     level: string;
     appId: string;
+    exception: Exception;
 }

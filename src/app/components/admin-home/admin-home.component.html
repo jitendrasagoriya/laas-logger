@@ -35,7 +35,7 @@
     <div class="row">
       <div class="col-lg-3 col-sm-6">
 
-        <div class="teaser warning_bg_color counter-background-teaser text-center">          
+        <div class="teaser warning_bg_color counter-background-teaser text-center">
           <h3>{{infoCount}}</h3>
           <p>Info / Day</p>
         </div>
@@ -77,9 +77,9 @@
           <div class="with_border with_padding">
             <h4>Daily Logs </h4>
             <div class="canvas-chart-wrapper">
-                <canvas baseChart 
-                [data]="pieChartData" 
-                [labels]="pieChartLabels" 
+                <canvas baseChart
+                [data]="pieChartData"
+                [labels]="pieChartLabels"
                 [chartType]="pieChartType"
                 [options]="pieChartOptions"
                 [plugins]="pieChartPlugins"
@@ -96,7 +96,7 @@
           <div class="with_border with_padding">
             <h4>Weekly Logs</h4>
             <div class="canvas-chart-wrapper">
-                <canvas baseChart 
+                <canvas baseChart
                 [datasets]="barChartData"
                 [labels]="barChartLabels"
                 [options]="barChartOptions"
@@ -131,7 +131,7 @@
                   <td>{{log.level}}</td>
                   <td>{{log.log}}</td>
                   <td>{{log.logTime}}</td>
-                </tr>                  
+                </tr>
               </tbody>
             </table>
         </div>

@@ -63,7 +63,8 @@ export class LoginComponent implements OnInit {
                 onBoardTime: application.onBoardTime,
                 email: application.email,
                 access: application.access,
-                id: application.id
+                id: application.id,
+                superAdmin: false
               }
             ));
             this.router.navigate(['admin/home']);

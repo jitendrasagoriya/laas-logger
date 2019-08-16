@@ -1,9 +1,11 @@
 import {Log} from "./log";
 import {Exception} from "./exception";
-export class SearchResult {
+import {Application} from "./application";
+
+export class ApplicationResult {
   public totalCount: number;
   public currentPageNumber: number;
-  public list: Log[];
+  public applications: Application[];
   public firstPage: number;
   public lastPage: number;
   public pageCount: number;

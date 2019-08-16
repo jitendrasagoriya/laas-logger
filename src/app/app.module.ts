@@ -13,7 +13,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { LoginComponent } from './components/login/login.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {Routes, RouterModule, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { SignupComponent } from './components/signup/signup.component';
@@ -24,11 +24,29 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ChartsModule } from 'ng2-charts';
 import { SearchComponent } from './components/search/search.component';
 import { ViewAllComponent } from './components/view-all/view-all.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { SuperAdminComponent } from './components/super-admin/super-admin.component';
+import { AdminLoginComponent } from './components/admin-login/admin-login.component';
+import { SuperAdminHomeComponent } from './components/super-admin-home/super-admin-home.component';
+import {AdminAuthGuardGuard} from "./guards/admin-auth-guard.guard";
+import { ErrorTypePipe } from './filters/error-type.pipe';
 
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'sign-up',  component: SignupComponent },
+  { path:'admin-login',component: AdminLoginComponent },
+  {
+    path:'super-admin',
+    component: AdminComponent,
+    children:[
+      {
+        path: 'home',
+        component: SuperAdminComponent,
+        canActivate: [AdminAuthGuardGuard]
+      }
+    ]
+  },
   {
     path: 'admin',
     component: HomeComponent,
@@ -45,6 +63,11 @@ const appRoutes: Routes = [
       },
       {
         path: 'search',
+        component: SearchComponent,
+        canActivate: [AuthGuardService]
+      },
+      {
+        path: 'search:keyword',
         component: SearchComponent,
         canActivate: [AuthGuardService]
       },
@@ -74,7 +97,12 @@ const appRoutes: Routes = [
     AdminHomeComponent,
     ProfileComponent,
     SearchComponent,
-    ViewAllComponent
+    ViewAllComponent,
+    AdminComponent,
+    SuperAdminComponent,
+    AdminLoginComponent,
+    SuperAdminHomeComponent,
+    ErrorTypePipe
   ],
   imports: [
     BrowserModule,

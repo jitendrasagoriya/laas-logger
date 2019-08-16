@@ -5,7 +5,7 @@
 
     <header class="page_header_side page_header_side_sticked active-slide-side-header ds">
       <div class="side_header_logo ds ms">
-        <a href="admin/home">
+        <a href="super-admin/home">
           <span class="logo_text margin_0">
             Log As
             <strong>Service</strong>
@@ -31,20 +31,14 @@
                       <img src="assets/images/team/01.jpg" alt="">
                     </div>
                     <div class="media-body media-middle">
-                      <h4>{{application}}</h4>
-                      Administrator
+                      <h4>{{email}}</h4>
+                      SUPER ADMIN
 
                     </div>
 
                   </div>
                 </a>
                 <ul>
-                  <li>
-                    <a href="admin/profile">
-                      <i class="fa fa-user"></i>
-                      Profile
-                    </a>
-                  </li>
 
                   <li>
                     <a href="javascript:void(0)" (click)="logout()">
@@ -104,80 +98,19 @@
 
     <header class="page_header header_darkgrey">
 
-      <!--<div class="widget widget_search">
-        <form method="get" class="form-inline" >
+      <div class="widget widget_search">
+        <form method="get" class="searchform form-inline" action="#">
           <div class="form-group">
             <label class="screen-reader-text" for="widget-search-header">Search for:</label>
-            <input #searchText id="widget-search-header" type="text" value="" name="search" class="form-control" placeholder="Search">
+            <input id="widget-search-header" type="text" value="" name="search" class="form-control" placeholder="Search">
           </div>
-          <button  class="theme_button color1" (click)="searchByKeyword(searchText.value)">Search</button>
+          <button type="submit" class="theme_button color1">Search</button>
         </form>
       </div>
--->
+
+
       <div class="pull-right big-header-buttons">
         <ul class="inline-dropdown inline-block">
-           <li class="dropdown header-notes-dropdown">
-            <a class="header-button" data-target="#" href="./" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-              <i class="fa fa-calendar-o grey"></i>
-              <span class="header-button-text">User</span>
-            </a>
-            <div class="dropdown-menu ls">
-
-              <div class="dropdwon-menu-title with_background">
-                <strong>14 Pending</strong> Tasks
-
-                <div class="pull-right darklinks">
-                  <a href="#">View All</a>
-                </div>
-
-              </div>
-
-
-
-            </div>
-
-          </li>
-
-          <!-- Uncomment following to show user menu
-
-        <li class="dropdown user-dropdown-menu">
-          <a class="header-button" id="user-dropdown-menu" data-target="#" href="./" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-            <i class="fa fa-user grey"></i> <span class="header-button-text">User</span>
-          </a>
-          <div class="dropdown-menu ls">
-            <ul class="nav darklinks">
-              <li>
-                <a href="admin_profile.html">
-                  <i class="fa fa-user"></i>
-                  Profile
-                </a>
-              </li>
-              <li>
-                <a href="admin_profile_edit.html">
-                  <i class="fa fa-edit"></i>
-                  Edit Profile
-                </a>
-              </li>
-              <li>
-                <a href="admin_inbox.html">
-                  <i class="fa fa-envelope-o"></i>
-                  Inbox
-                </a>
-              </li>
-              <li>
-                <a href="admin_signin.html">
-                  <i class="fa fa-sign-out"></i>
-                  Log Out
-                </a>
-              </li>
-            </ul>
-
-          </div>
-
-        </li>
-
-      -->
-
           <li class="dropdown visible-xs-inline-block">
             <a href="#" class="search_modal_button header-button">
               <i class="fa fa-search grey"></i>
@@ -195,14 +128,18 @@
           <div class="col-md-6">
             <ol class="breadcrumb darklinks">
               <li>
-                <a href="#">Homepage</a>
+                <a href="#">Admin Home</a>
               </li>
               <li class="active">Dashboard</li>
             </ol>
           </div>
           <!-- .col-* -->
           <div class="col-md-6 text-md-right">
-
+            <span class="dashboard-daterangepicker">
+              <i class="fa fa-calendar"></i>
+              <span></span>
+              <i class="caret"></i>
+            </span>
           </div>
           <!-- .col-* -->
         </div>
@@ -210,14 +147,10 @@
       </div>
       <!-- .container -->
     </section>
+    <section class="ls section_padding_top_50 section_padding_bottom_50 columns_padding_10">
 
-
-
-
-<section class="ls section_padding_top_50 section_padding_bottom_50 columns_padding_10">
-
-    <router-outlet></router-outlet>
-</section>
+      <router-outlet></router-outlet>
+    </section>
 
     <section class="page_copyright ds darkblue_bg_color">
       <div class="container-fluid">

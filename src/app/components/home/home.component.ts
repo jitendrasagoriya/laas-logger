@@ -20,6 +20,10 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
+  searchByKeyword(searchKeyword: string) {
+    this.router.navigate(['search', {keyword: searchKeyword}]);
+    //this.router.navigateByUrl('admin/search', { state: { keyword:searchKeyword } });
+  }
 
   logout() {
     if (localStorage.getItem('currentUser')) {

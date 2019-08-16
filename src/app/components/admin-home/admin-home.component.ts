@@ -4,6 +4,9 @@ import { Log } from './../../models/log';
 import { LogService } from './../../services/log.service';
 import { Component, OnInit, Input, AfterViewInit, AfterContentInit } from '@angular/core';
 import {NgjLoggerService} from "../../../../projects/ngj-logger/src/lib/ngj-logger.service";
+// @ts-ignore
+import {SearchResult} from "../../models/searchresult";
+
 
 
 @Component({
@@ -22,6 +25,7 @@ export class AdminHomeComponent implements OnInit, AfterViewInit ,  AfterContent
   private j: number;
   private k: number;
   private loadAllLogs = false;
+  public result = {} as SearchResult;
 
   public barChartOptions: ChartOptions = {
     responsive: true,
@@ -52,8 +56,13 @@ export class AdminHomeComponent implements OnInit, AfterViewInit ,  AfterContent
   constructor(private logService: LogService, private logger: NgjLoggerService) {
 
   }
-  ngOnInit() {
+
+  printlog(){
     this.logger.log('Test Successful......')
+
+  }
+  ngOnInit() {
+
 
     this.getLogs();
     this.getYesterdayTotalCount();
@@ -71,8 +80,11 @@ export class AdminHomeComponent implements OnInit, AfterViewInit ,  AfterContent
   }
 
   getLogs(): void {
-    this.logService.getLogs()
-      .subscribe(logs => (this.logs = logs));
+    this.logService.search('', '', '','' ,0,15)
+      .subscribe((result) => {
+        this.result = result;
+        this.logs = this.result.list;
+      });
   }
 
   ngAfterViewInit() {

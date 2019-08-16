@@ -68,8 +68,8 @@ export class SignupComponent implements OnInit {
               onBoardTime: application.onBoardTime,
               email: application.email,
               access: application.access,
-              id: application.id
-
+              id: application.id,
+              superAdmin: true
             }
           ));
           this.router.navigate(['admin/home']);

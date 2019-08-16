@@ -10,15 +10,15 @@
 
               <form action="./" class="form-inline filters-form">
 											<span>
-												<label class="grey">With Selected:</label>
-												<select #levelFilter class="form-control with-selected" name="type" id="type" (change)="filterByLevel(levelFilter.value)">
-													<option value="All">All</option>
+												<label class="grey" for="with-selected">With Selected:</label>
+												<select #levelFilter class="form-control with-selected" name="with-selected" id="with-selected">
+													<option value="">-</option>
 													<option value="INFO">INFO</option>
 													<option value="DEBUG">DEBUG</option>
 													<option value="ERROR">ERROR</option>
 												</select>
 											</span>
-                <!--<span>
+                <span>
 												<label class="grey" for="orderby">Sort By:</label>
 												<select class="form-control orderby" name="orderby" id="orderby">
 													<option value="date" selected>Date</option>
@@ -26,7 +26,7 @@
 													<option value="total">Total</option>
 													<option value="status">Status</option>
 												</select>
-											</span>-->
+											</span>
 
                 <span>
 												<label class="grey" for="showcount">Show:</label>
@@ -41,7 +41,23 @@
               </form>
 
             </div>
+            <!-- .col-* -->
+            <div class="col-lg-3 text-lg-right">
+              <div class="widget widget_search">
 
+                <form method="get" class="searchform" action="./">
+                  <!-- <div class="form-group-wrap"> -->
+                  <div class="form-group">
+                    <label class="sr-only" for="widget-search">Search for:</label>
+                    <input id="widget-search" type="text" value="" name="search" class="form-control" placeholder="Search Here...">
+                  </div>
+                  <button type="submit" class="theme_button color1">Search</button>
+                  <!-- </div> -->
+                </form>
+              </div>
+
+            </div>
+            <!-- .col-* -->
           </div>
           <!-- .row -->
 
@@ -50,30 +66,40 @@
               <tr>
 
                 <th>Id:</th>
-                <th>Level:</th>
-                <th>Log:</th>
+                <th>name:</th>
+                <th>Description:</th>
+                <th>Token:</th>
                 <th>Date:</th>
+                <th>Email:</th>
               </tr>
 
 
 
-              <tr class="item-editable" *ngFor="let log of logs; let i=index;">
+              <tr class="item-editable" *ngFor="let application of applications">
 
-                <td class="media-middle"> #{{log.id}} </td>
+                <td class="media-middle"> {{application.id}} </td>
                 <td>
                   <div class="media">
                     <div class="media-body">
                       <h5>
-                        {{log.level}}
+                        {{application.appName}}
                       </h5>
                     </div>
                   </div>
                 </td>
                 <td class="media-middle">
-                  {{log.log}}
+                  {{application.description}}
                 </td>
                 <td class="media-middle">
-                  <time datetime="2017-02-08T20:25:23+00:00" class="entry-date">{{log.logTime}}</time>
+                   {{application.accessToken}}
+                </td>
+
+                <td class="media-middle">
+                  <time datetime="2017-02-08T20:25:23+00:00" class="entry-date">{{application.onBoardTime}}</time>
+                </td>
+
+                <td class="media-middle">
+                 {{application.email}}
                 </td>
               </tr>
 
@@ -91,7 +117,7 @@
       <div class="col-sm-12">
         <div class="row">
           <div class="col-md-6">
-            <ul class="pagination" *ngIf="result.list">
+            <!--<ul class="pagination" *ngIf="result.list">
               <li  [ngClass]="{'disabled':result.currentPageNumber==result.firstPage}">
                 <a href="javascript:void(0)" (click)="previous()">
                   <span class="sr-only">Prev</span>
@@ -108,7 +134,7 @@
                   <i class="fa fa-angle-right"  ></i>
                 </a>
               </li>
-            </ul>
+            </ul>-->
           </div>
           <div class="col-md-6 text-md-right">
             Showing 1 to 6 of 12 items

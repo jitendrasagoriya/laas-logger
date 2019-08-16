@@ -15,8 +15,11 @@ export class ViewAllComponent implements OnInit {
 
   public logs: Log[];
   public result = {} as SearchResult;
-  public pageSize: number = 0;
+  public pageSize: number = 10;
   public pageNumber: number = 0;
+  public level: string = "";
+  public keyword: string = "";
+
 
   constructor(private logger: NgjLoggerService,
               private logService: LogService) { }
@@ -30,16 +33,27 @@ export class ViewAllComponent implements OnInit {
   }
 
   public getNext(pageNumber: number) {
-    this.logService.search('', '', '', '',pageNumber,this.pageSize)
+    this.pageNumber = pageNumber;
+    this.search();
+  }
+
+  public changePageSize(size:string) {
+    this.pageSize = parseInt(size);
+    this.search();
+  }
+
+  private search() {
+    this.logService.search(this.keyword, this.level, '', '',this.pageNumber ,this.pageSize)
       .subscribe((result) => {
+        this.logger.info("search",["result",this.result])
         this.result = result;
         this.logs = this.result.list;
       });
   }
 
-  public changePageSize(size:string) {
-    this.pageSize = parseInt(size);
-    this.getNext(this.pageNumber);
+  public filterByLevel(level: string){
+     this.level = level;
+     this.search();
   }
 
   public previous() {
@@ -47,7 +61,8 @@ export class ViewAllComponent implements OnInit {
     this.pageNumber = this.result.currentPageNumber-1;
     if(this.pageNumber < 1)
       this.pageNumber = 1;
-    this.getNext(this.pageNumber);
+
+    this.search();
   }
 
   public next() {
@@ -55,7 +70,8 @@ export class ViewAllComponent implements OnInit {
     this.pageNumber = this.result.currentPageNumber + 1;
     if(this.pageNumber > this.result.totalCount)
       this.pageNumber = this.result.totalCount;
-    this.getNext(this.pageNumber);
+
+    this.search();
   }
 
   public totalPage(n: number): number[] {
