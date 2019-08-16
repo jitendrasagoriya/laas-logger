@@ -155,6 +155,7 @@ ng2-charts
 ISC
 
 ngj-logger
+MIT
 
 rxjs
 Apache-2.0
