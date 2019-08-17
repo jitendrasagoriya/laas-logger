@@ -10,7 +10,10 @@ import { Observable } from 'rxjs';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':  'application/json'
+    'Content-Type':  'application/json',
+    'Cache-Control':'no-cache, no-store, must-revalidate',
+    'Pragma':'no-cache',
+    'Expires':'0'
   })
 };
 

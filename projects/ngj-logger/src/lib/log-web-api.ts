@@ -1,5 +1,5 @@
 import { catchError } from 'rxjs/internal/operators/catchError';
-import { LogEntry, WebLog } from './ngj-logger.service';
+import { LogEntry } from './ngj-logger.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LogPublisher } from './logPublisher';
 import { Observable, of } from 'rxjs';

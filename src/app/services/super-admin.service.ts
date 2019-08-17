@@ -33,7 +33,10 @@ export class SuperAdminService {
     console.log(this.configurationService.getAdminUrl())
     const options = { params: new HttpParams().set('email', email.trim()).set('password', password.trim()),
       headers: new HttpHeaders({
-        'Content-Type':  'application/json'
+        'Content-Type':  'application/json',
+        'Cache-Control':'no-cache, no-store, must-revalidate',
+        'Pragma':'no-cache',
+        'Expires':'0'
       }) };
     return this.http.get<Admin>(this.configurationService.getAdminUrl()+"admin-login/", options)
       .pipe(

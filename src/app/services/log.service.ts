@@ -12,7 +12,10 @@ import { StringDecoder } from 'string_decoder';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
-    'X-AUTH-LOG-HEADER': ''
+    'X-AUTH-LOG-HEADER': '',
+    'Cache-Control':'no-cache, no-store, must-revalidate',
+    'Pragma':'no-cache',
+    'Expires':'0'
   })
 };
 

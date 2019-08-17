@@ -108,7 +108,7 @@ export class NgjLoggerService {
   }
 
   private writeToLog(msg: string, level: LogLevel, params: any[]) {
-    console.log('ram '+this.shouldLog(level))
+    //console.log('ram '+this.shouldLog(level))
     if (this.shouldLog(level)) {
       const entry: LogEntry = new LogEntry();
       entry.message = msg;

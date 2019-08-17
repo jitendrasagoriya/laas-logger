@@ -5,7 +5,7 @@ import {environment} from "../../environments/environment.prod";
 export class ConfigurationService {
 
   public readonly localBase = 'http://localhost:8084/api/';
-  public readonly serverBase = 'https://log-as-service.herokuapp.com/'
+  public readonly serverBase = 'http://www.logasservice.online/api/'
 
   public baseProdUrl = this.serverBase +'db/ui/log/';
   public baseDevUrl = this.localBase +'db/ui/log/';
@@ -16,7 +16,7 @@ export class ConfigurationService {
   public adminLocalUrl = this.localBase + 'admin/'
   public adminServerUrl = this.serverBase + 'admin/'
 
-  public isProd = true;
+  public isProd = false;
   constructor() { }
 
   public getBaseUrl(): string {
