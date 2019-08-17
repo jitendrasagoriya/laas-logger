@@ -7,8 +7,8 @@
     },
     {
       "loggerName": "webapi",
-      "loggerLocation": "http://www.logasservice.online/api/db/ui/log/",
-      "token": "UPQGPK5T2J7BM0UNEEA6HHNXILX34B331562438203721",
+      "loggerLocation": "https://www.logasservice.online/api/db/ui/log/",
+      "token": "EF24LWBHE7NHN9XZ4MPW8M91PCCL35F91563856449298",
       "isActive": true
     }
   ]
