@@ -16,7 +16,7 @@ export class ConfigurationService {
   public adminLocalUrl = this.localBase + 'admin/'
   public adminServerUrl = this.serverBase + 'admin/'
 
-  public isProd = false;
+  public isProd = true;
   constructor() { }
 
   public getBaseUrl(): string {
